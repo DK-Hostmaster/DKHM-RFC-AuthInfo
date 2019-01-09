@@ -348,7 +348,7 @@ We are still evaluating the generation of the unique key, where we want to base 
 
 The requirements are:
 
-- Unpredictable (is secure to the extend possible and for the given TTL timeframe)
+- Unpredictable (is secure to the extent possible and for the given TTL timeframe)
 - Speakable (can be spoken over phone)
 - Usable (constrained on length and format)
 
