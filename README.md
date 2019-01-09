@@ -249,7 +249,7 @@ The only operation where a _push_ is supported is when the existing and new regi
       </domain:update>
     </update>
     <extension>
-      <dkhm:authId xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</dkhm:authId>
+      <dkhm:authInfo xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</dkhm:authInfo>
     </extension>
     <clTRID>ABC-12345</clTRID>
   </command>
@@ -266,18 +266,18 @@ Ref: [`update_domain_change_name_server_with_authid_extension.xml`](https://gith
 This XSD definition is for the proposed extension `dkhm:authIdExDate`.
 
 ```xml
-  <!-- custom: authId  -->
-  <simpleType name="authId">
+  <!-- custom: authInfo token  -->
+  <simpleType name="authInfoToken">
     <restriction base="token" />
   </simpleType>
 
-  <!-- custom: authId expiration date -->
-  <simpleType name="authIdExDate">
+  <!-- custom: authInfo expiration date -->
+  <simpleType name="authInfoExDate">
     <restriction base="dateTime" />
   </simpleType>
 ```
 
-Ref: [`dkhm-2.6.xsd`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/master/dkhm-2.6.xsd)
+Ref: [`dkhm-2.6.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/auth_id/dkhm-2.6.xsd)
 
 ## Scenario Matrix
 
@@ -298,9 +298,9 @@ These parameters are evaluated at run time and for the sake of communication and
 | Can unset **AuthInfo** token | X            | X                          |         |
 | Can view **AuthInfo** token  | X            | X                          | X (1)   |
 
-1) Can see if Registrant or Admin/Proxy has initiated request for change of name server, please see below: "Registrant, Admin/Proxy Generates AuthInfo token directly in registry".
+1) Can see if Registrant or Admin/Proxy has initiated request for change of name server, please see below: "Generation of AuthInfo token with Registry".
 
-### Registrant, Admin/Proxy Generates AuthInfo token directly in registry
+### Generation of AuthInfo token with Registry
 
 | Scenario                           | Outcome            |
 | :--------------------------------- | ------------------ |
