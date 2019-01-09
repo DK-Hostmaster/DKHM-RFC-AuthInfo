@@ -327,10 +327,10 @@ These parameters are evaluated at run time and for the sake of communication and
 
 ### Change of Name Server, push (external)
 
-| Scenario                                     |  AuthInfo Token provided  | Outcome |
-| :------------------------------------------- | :-----------------------: | ------- |
-| Existing NSP initiates change of name server | X                         | Error   |
-| Existing NSP initiates change of name server |                           | Error   |
+| Scenario                                     |  AuthInfo Token provided | Outcome |
+| :------------------------------------------- | :----------------------: | ------- |
+| Existing NSP initiates change of name server | X                        | Error   |
+| Existing NSP initiates change of name server |                          | Error   |
 
 ### AuthInfo Token Format
 
