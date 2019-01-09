@@ -5,12 +5,12 @@
 <!-- MarkdownTOC -->
 
 - [Introduction](#introduction)
-    - [About this document](#about-this-document)
-    - [XML and XSD examples](#xml-and-xsd-examples)
+    - [About this Document](#about-this-document)
+    - [XML and XSD Examples](#xml-and-xsd-examples)
 - [Description](#description)
     - [Setting and Unsetting the AuthInfo Token](#setting-and-unsetting-the-authinfo-token)
     - [Fetching the AuthInfo via EPP](#fetching-the-authinfo-via-epp)
-    - [Name Server changes](#name-server-changes)
+    - [Name Server Change Request](#name-server-change-request)
     - [Requesting a Name Server Change Using AuthInfo via a Pull Operation](#requesting-a-name-server-change-using-authinfo-via-a-pull-operation)
 - [XSD Definition](#xsd-definition)
 - [Scenario Matrix](#scenario-matrix)
@@ -42,7 +42,7 @@ This is a draft and proposal for an extension to handle **AuthInfo** (authorizat
 - A Name service provider (NSP) can control the flow to own name servers by only supporting _pull_ operations
 
 <a id="about-this-document"></a>
-### About this document
+### About this Document
 
 We have adopted the term RFC (_Request For Comments_), due to the recognition in the term and concept, so this document is a process supporting document, aiming to serve the purpose of obtaining a common understanding of the proposed implementation and to foster discussion on the details of the implementation. The final specification will be lifted into the [DK Hostmaster EPP Service Specification](https://github.com/DK-Hostmaster/epp-service-specification) implementation and this document will be closed for comments and the document no longer be updated.
 
@@ -51,7 +51,7 @@ The working title for this initiative was **AuthID**, we have later adopted the 
 The term **external** name server change is between two different name server administrators, which cannot be resolved to have any relation of belonging to the same registrar group in the registry. The term **Internal** name server change is between two name server administrators, which can be resolved to have a relation of belonging to the same registrar group with the registry.
 
 <a id="xml-and-xsd-examples"></a>
-### XML and XSD examples
+### XML and XSD Examples
 
 All example XML files are available in the [DK Hostmaster EPP XSD repository](https://github.com/DK-Hostmaster/epp-xsd-files) in the [auth_id branch](https://github.com/DK-Hostmaster/epp-xsd-files/tree/auth_id).
 
@@ -230,8 +230,8 @@ Ref: [`info_domain_response_with_authid_extension.xml`](https://github.com/DK-Ho
 
 The response is extended with the `dkhm:authIdExDate` extension, communicating the expiration date of the current **AuthInfo** for the domain. Please see the XSD definition below.
 
-<a id="name-server-changes"></a>
-### Name Server changes
+<a id="name-server-change-request"></a>
+### Name Server Change Request
 
 For the actual use of the **AuthInfo**, the following use-cases have been identified:
 
