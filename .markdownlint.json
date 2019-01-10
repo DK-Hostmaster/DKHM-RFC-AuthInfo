@@ -1,6 +1,8 @@
 {
     "html": false,
     "blanks-around-headings": false,
-    "ul-indent": false,
+    "ul-indent": {
+        "indent": 4
+    },
     "line-length": false
 }
