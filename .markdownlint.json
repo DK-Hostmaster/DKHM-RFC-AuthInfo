@@ -2,7 +2,8 @@
     "html": false,
     "blanks-around-headings": false,
     "ul-indent": {
-        "indent": 4
+        "indent": 2
     },
-    "line-length": false
+    "line-length": false,
+    "first-line-heading": false
 }
