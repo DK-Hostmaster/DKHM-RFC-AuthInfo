@@ -212,7 +212,7 @@ And the `info domain` response if a **AuthInfo** is present.
       </domain:infData>
     </resData>
     <extension>
-      <dkhm:authIdExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">2018-11-14T09:00:00.0Z</dkhm:authIdExDate>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
     </extension>
     <trID>
       <clTRID>ABC-12345</clTRID>
