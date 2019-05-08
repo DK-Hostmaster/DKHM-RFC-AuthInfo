@@ -299,6 +299,8 @@ This XSD definition is for the proposed extension `dkhm:authIdExDate`.
 
 Ref: [`dkhm-2.6.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/auth_id/dkhm-2.6.xsd)
 
+:warning: The reference and file mentioned above is not similar to the 2.6 version available in production, so this file will be re-versioned upon release.
+
 ## Scenario Matrix
 
 These matrixes aims to describe the outcome of different scenarios based on the relevant parameters.
