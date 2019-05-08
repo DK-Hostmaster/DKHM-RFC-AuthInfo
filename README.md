@@ -374,6 +374,18 @@ The requirements are:
 - Speakable (can be spoken over phone)
 - Usable (constrained on length and format)
 
+### Alternative proposal
+
+An alternative format could be containing the relevant domain name instead of the handle pointing to the creator, since the creator is not necessarily important, especially in the use-case where you are handling several tokens for several domain names in parallel.
+
+Format:
+
+`eksempel-dk-098f6bcd4621d373cade4e832627b4f6`
+
+And with IDN support (`æøåöäüé.dk`):
+
+`xn--4cabco7dk5a-dk-098f6bcd4621d373cade4e832627b4f6`
+
 ## References
 
 - [DK Hostmaster EPP Service Specification](https://github.com/DK-Hostmaster/epp-service-specification)
