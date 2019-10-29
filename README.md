@@ -278,8 +278,46 @@ The only operation where a _push_ is supported is when the existing and new regi
 
 Ref: [`update_domain_change_name_server_with_authid_extension.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_change_name_server_with_authid_extension.xml)
 
+1 This implementation cannot be contained to the standard EPP specification, but relies on an extension
+1 This implementation might set a requirement for a constraint for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
+
+Alternatively the use of an extension could be avoided by using the existing `domain:authInfo` field, which is also used to handle the **AuthInfo** token.
+
+The issue with this approach however is the potential conflict for identification and mapping between the **AuthInfo** authorisation. For the first implementation only the change of nameserver operation is in scope, but if change of registrant is also opened for support via **AuthInfo** the token is no longer unambigous.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+  <command>
+    <update>
+      <domain:update xmlns:domain="urn:ietf:params:xml:ns:domain-1.0">
+        <domain:name>example.com</domain:name>
+        <domain:add>
+          <domain:ns>
+            <domain:hostObj>ns2.example.com</domain:hostObj>
+          </domain:ns>
+        </domain:add>
+        <domain:rem>
+          <domain:ns>
+            <domain:hostObj>ns1.example.com</domain:hostObj>
+          </domain:ns>
+        </domain:rem>
+        <domain:chg>
+          <domain:authInfo>
+            <domain:pw>DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</domain:pw>
+          </domain:authInfo>
+        </domain:chg>
+      </domain:update>
+    </update>
+    <clTRID>ABC-12345</clTRID>
+  </command>
+</epp>
+```
+
+Ref: [`update_domain_change_name_server_with_authid.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_change_name_server_with_authid.xml)
+
 1 This implementation can be contained to the standard EPP specification
-1 This implementation set a requirement for a constraint for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
+1 This implementation might set a requirement for a constraint for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
 
 ## XSD Definition
 
