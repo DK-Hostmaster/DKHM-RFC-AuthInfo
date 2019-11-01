@@ -126,7 +126,7 @@ Here an an example outlining the suggestion for implementation of usage pattern,
         <domain:name>example.com</domain:name>
         <domain:chg>
           <domain:authInfo>
-            <domain:pw></domain:pw>
+            <domain:null>
           </domain:authInfo>
         </domain:chg>
       </domain:update>
@@ -137,6 +137,10 @@ Here an an example outlining the suggestion for implementation of usage pattern,
 ```
 
 Ref: [`update_domain_unset_authid.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_unset_authid.xml)
+
+The above outline is matching the description in RFC:5731
+
+> A <domain:null> element can be used within the <domain:authInfo> element to remove authorization information.
 
 The command simply unsets (_removes/clears_) an **AuthInfo** token if it exists.
 
