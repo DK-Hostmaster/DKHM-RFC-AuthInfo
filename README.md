@@ -212,7 +212,7 @@ And the `info domain` response if a **AuthInfo** is present.
       </domain:infData>
     </resData>
     <extension>
-      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
     </extension>
     <trID>
       <clTRID>ABC-12345</clTRID>
@@ -269,7 +269,7 @@ The only operation where a _push_ is supported is when the existing and new regi
       </domain:update>
     </update>
     <extension>
-      <dkhm:authInfo xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</dkhm:authInfo>
+      <dkhm:authInfo xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-3.1">DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</dkhm:authInfo>
     </extension>
     <clTRID>ABC-12345</clTRID>
   </command>
@@ -335,9 +335,9 @@ This XSD definition is for the proposed extension `dkhm:authIdExDate`.
   </simpleType>
 ```
 
-Ref: [`dkhm-2.6.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/auth_id/dkhm-2.6.xsd)
+Ref: [`dkhm-3.1.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/auth_id/dkhm-3.1.xsd)
 
-:warning: The reference and file mentioned above is not similar to the 2.6 version available in production, so this file will be re-versioned upon release.
+:warning: The reference and file mentioned above is not released at this time, so this file might be re-versioned upon release.
 
 ## Scenario Matrix
 
