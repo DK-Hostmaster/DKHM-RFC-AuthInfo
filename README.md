@@ -85,7 +85,7 @@ Only one active **AuthInfo** token is allowed at a given time, if an **AuthInfo*
 
 Setting the **AuthInfo** is as described above also expected to be handled by the `update domain` command, since this is the sole command working on the domain object in general.
 
-Setting the **AuthInfo** via EPP is expected to be accomplished using the following example, where the keyword `AUTO` indicates and hence initiates the generation of a new **AuthInfo** token.
+Setting the **AuthInfo** via EPP is expected to be accomplished using the following example, where the keyword `auto` indicates and hence initiates the generation of a new **AuthInfo** token.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -96,7 +96,7 @@ Setting the **AuthInfo** via EPP is expected to be accomplished using the follow
         <domain:name>example.com</domain:name>
         <domain:chg>
           <domain:authInfo>
-            <domain:pw>AUTO</domain:pw>
+            <domain:pw>auto</domain:pw>
           </domain:authInfo>
         </domain:chg>
       </domain:update>
