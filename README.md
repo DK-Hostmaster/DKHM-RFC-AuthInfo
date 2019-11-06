@@ -28,7 +28,7 @@
 
 ## Introduction
 
-This is a draft and proposal for an extension to handle **AuthInfo** (authorization token) for name server changes via the DK Hostmaster EPP, Registrar-portal (RP) and self-service (SB) portals/services.
+This is a draft and proposal for a new proces for name server changes via the DK Hostmaster EPP, Registrar-portal (RP) and self-service (SB) portals/services using **AuthInfo** (authorization token).
 
 - The goal is to make the **AuthInfo** token mandatory for use in change name server operations
 - An active **AuthInfo** token expires if the registrant is changed
@@ -49,6 +49,8 @@ We have adopted the term RFC (_Request For Comments_), due to the recognition in
 The working title for this initiative was **AuthID**, we have later adopted the term **AuthInfo** and refer to the actual mechanism as **AuthInfo** token for easier mapping with existing and standard EPP RFC terminology. Do note the term **AuthID** might appear in examples, documentation and filenames, this can be exchanged for **AuthInfo** and **AuthInfo** token where appropriate.
 
 The term **external** name server change is between two different name server administrators, which cannot be resolved to have any relation of belonging to the same registrar group in the registry. The term **Internal** name server change is between two name server administrators, which can be resolved to have a relation of belonging to the same registrar group with the registry.
+
+The term NSP is use to describe the nameserver administrator (NSA) and registrar users with the similar role in a registrar group.
 
 ### XML and XSD Examples
 
@@ -85,7 +87,7 @@ Only one active **AuthInfo** token is allowed at a given time, if an **AuthInfo*
 
 Setting the **AuthInfo** is as described above also expected to be handled by the `update domain` command, since this is the sole command working on the domain object in general.
 
-Setting the **AuthInfo** via EPP is expected to be accomplished using the following example, where the keyword `AUTO` indicates and hence initiates the generation of a new **AuthInfo** token.
+Setting the **AuthInfo** via EPP is expected to be accomplished using the following example, where the keyword `auto` indicates and hence initiates the generation of a new **AuthInfo** token.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -231,7 +233,6 @@ The response is extended with the `dkhm:authIdExDate` extension, communicating t
 For the actual use of the **AuthInfo**, the following use-cases have been identified:
 
 - Requesting a Name Server Change Using AuthInfo via a Pull Operation
-- Requesting a Name Server Change via a Push Operation
 
 ### Requesting a Name Server Change Using AuthInfo via a Pull Operation
 
@@ -246,44 +247,6 @@ The **AuthInfo** can be transported _out-of-band_.
 All actual change of name servers has to go via the registry and the existing infrastructure in place to support these requests and operations.
 
 The request for completing the change of name server via EPP (GUI availability via SB and RP would of course have to support transporting similar parameters).
-
-The only operation where a _push_ is supported is when the existing and new registrar can be resolved to be the same registrar group, so the initiator can be either of the two since they both hold the privilege to execute the operation, this is what is referred to as an internal change of name server operation.
-
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
-  <command>
-    <update>
-      <domain:update xmlns:domain="urn:ietf:params:xml:ns:domain-1.0">
-        <domain:name>example.com</domain:name>
-        <domain:add>
-          <domain:ns>
-            <domain:hostObj>ns2.example.com</domain:hostObj>
-          </domain:ns>
-        </domain:add>
-        <domain:rem>
-          <domain:ns>
-            <domain:hostObj>ns1.example.com</domain:hostObj>
-          </domain:ns>
-        </domain:rem>
-      </domain:update>
-    </update>
-    <extension>
-      <dkhm:authInfo xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</dkhm:authInfo>
-    </extension>
-    <clTRID>ABC-12345</clTRID>
-  </command>
-</epp>
-```
-
-Ref: [`update_domain_change_name_server_with_authid_extension.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_change_name_server_with_authid_extension.xml)
-
-1 This implementation cannot be contained to the standard EPP specification, but relies on an extension
-1 This implementation might set a requirement for a constraint for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
-
-Alternatively the use of an extension could be avoided by using the existing `domain:authInfo` field, which is also used to handle the **AuthInfo** token.
-
-The issue with this approach however is the potential conflict for identification and mapping between the **AuthInfo** authorisation. For the first implementation only the change of nameserver operation is in scope, but if change of registrant is also opened for support via **AuthInfo** the token is no longer unambigous.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -317,18 +280,13 @@ The issue with this approach however is the potential conflict for identificatio
 Ref: [`update_domain_change_name_server_with_authid.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_change_name_server_with_authid.xml)
 
 1 This implementation can be contained to the standard EPP specification
-1 This implementation might set a requirement for a constraint for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
+1 This implementation sets a requirement for a recommended use, for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
 
 ## XSD Definition
 
-This XSD definition is for the proposed extension `dkhm:authIdExDate`.
+This XSD definition is for the proposed extension `dkhm:authIdExDate`, which is used to enrich the response to the `info domain` request.
 
 ```xml
-  <!-- custom: authInfo token  -->
-  <simpleType name="authInfoToken">
-    <restriction base="token" />
-  </simpleType>
-
   <!-- custom: authInfo expiration date -->
   <simpleType name="authInfoExDate">
     <restriction base="dateTime" />
@@ -371,26 +329,12 @@ These parameters are evaluated at run time and for the sake of communication and
 1) The **AuthInfo** token is made visible to the existing NSP, registrant and admin/proxy
 2) The **AuthInfo** token is made visible to the new NSP (recipient) and existing NSP, registrant and admin/proxy. The new NSP can then initiate the change of name servers request (_pull_).
 
-### Change of Name Server, pull (external)
+### Change of Name Server, pull (external and internal)
 
 | Scenario                                | AuthInfo Token provided | Outcome           |
 | :-------------------------------------- | :---------------------: | ----------------- |
 | New NSP initiates change of name server | X                       | Change successful |
 | New NSP initiates change of name server |                         | Error             |
-
-### Change of Name Server, push (external)
-
-| Scenario                                     |  AuthInfo Token provided | Outcome |
-| :------------------------------------------- | :----------------------: | ------- |
-| Existing NSP initiates change of name server | X                        | Error   |
-| Existing NSP initiates change of name server |                          | Error   |
-
-### Change of Name Server, push or pull (internal)
-
-| Scenario                                     | AuthInfo Token provided | Outcome           |
-| :------------------------------------------- | :---------------------: | ----------------- |
-| Existing NSP initiates change of name server | X                       | Change successful |
-| Existing NSP initiates change of name server |                         | Error             |
 
 ## AuthInfo Token Format
 
