@@ -98,7 +98,7 @@ Setting the **AuthInfo** via EPP is expected to be accomplished using the follow
         <domain:name>example.com</domain:name>
         <domain:chg>
           <domain:authInfo>
-            <domain:pw>AUTO</domain:pw>
+            <domain:pw>auto</domain:pw>
           </domain:authInfo>
         </domain:chg>
       </domain:update>
@@ -128,7 +128,7 @@ Here an an example outlining the suggestion for implementation of usage pattern,
         <domain:name>example.com</domain:name>
         <domain:chg>
           <domain:authInfo>
-            <domain:pw></domain:pw>
+            <domain:null>
           </domain:authInfo>
         </domain:chg>
       </domain:update>
@@ -139,6 +139,10 @@ Here an an example outlining the suggestion for implementation of usage pattern,
 ```
 
 Ref: [`update_domain_unset_authid.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_unset_authid.xml)
+
+The above outline is matching the description in RFC:5731
+
+> A <domain:null> element can be used within the <domain:authInfo> element to remove authorization information.
 
 The command simply unsets (_removes/clears_) an **AuthInfo** token if it exists.
 
@@ -214,7 +218,7 @@ And the `info domain` response if a **AuthInfo** is present.
       </domain:infData>
     </resData>
     <extension>
-      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-2.6">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
     </extension>
     <trID>
       <clTRID>ABC-12345</clTRID>
@@ -293,9 +297,9 @@ This XSD definition is for the proposed extension `dkhm:authIdExDate`, which is 
   </simpleType>
 ```
 
-Ref: [`dkhm-2.6.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/auth_id/dkhm-2.6.xsd)
+Ref: [`dkhm-3.1.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/auth_id/dkhm-3.1.xsd)
 
-:warning: The reference and file mentioned above is not similar to the 2.6 version available in production, so this file will be re-versioned upon release.
+:warning: The reference and file mentioned above is not released at this time, so this file might be re-versioned upon release.
 
 ## Scenario Matrix
 
