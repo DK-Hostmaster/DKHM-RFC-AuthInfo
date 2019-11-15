@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 echo ""
-echo "Using Markdownlint on all Markdown files"
-echo "----------------------------------------"
+echo "Using Markdownlint on README file"
+echo "---------------------------------"
 
-markdownlint *.md && markdownlint */*.md
+find . -name "*.md" | xargs markdownlint
