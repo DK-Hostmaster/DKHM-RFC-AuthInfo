@@ -2,6 +2,8 @@
 
 # DKHM RFC for AuthInfo
 
+![GitHub Workflow build status badge markdownlint](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Markdownlint%20Workflow/badge.svg)
+
 ## Table of Contents
 
 <!-- MarkdownTOC bracket=round levels="1,2,3,4" indent="  " -->
