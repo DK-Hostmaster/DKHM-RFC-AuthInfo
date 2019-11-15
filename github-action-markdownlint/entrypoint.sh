@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
-stdbuf -i0 -o0 -e0 echo "\n\nUsing Markdownlint on all Markdown files"
-stdbuf -i0 -o0 -e0 echo "----------------------------------------\n"
+echo "\n\nUsing Markdownlint on all Markdown files"
+echo "----------------------------------------\n"
 
 find . -name "*.md" | xargs -t markdownlint
 
