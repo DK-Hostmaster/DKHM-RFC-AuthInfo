@@ -22,7 +22,6 @@
   - [Generation of AuthInfo token with Registry](#generation-of-authinfo-token-with-registry)
   - [Change of Name Server, pull \(external and internal\)](#change-of-name-server-pull-external-and-internal)
 - [AuthInfo Token Format](#authinfo-token-format)
-  - [Alternative proposal](#alternative-proposal)
 - [References](#references)
 
 <!-- /MarkdownTOC -->
@@ -382,19 +381,6 @@ The requirements are:
 - Unpredictable (is secure to the extent possible and for the given TTL timeframe)
 - Speakable (can be spoken over phone)
 - Usable (constrained on length and format)
-
-<a id="alternative-proposal"></a>
-### Alternative proposal
-
-An alternative format could be containing the relevant domain name instead of the handle pointing to the creator, since the creator is not necessarily important, especially in the use-case where you are handling several tokens for several domain names in parallel.
-
-Format:
-
-`eksempel-dk-098f6bcd4621d373cade4e832627b4f6`
-
-And with IDN support (`æøåöäüé.dk`):
-
-`xn--4cabco7dk5a-dk-098f6bcd4621d373cade4e832627b4f6`
 
 <a id="references"></a>
 ## References
