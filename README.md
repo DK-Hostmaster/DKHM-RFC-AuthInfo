@@ -300,11 +300,19 @@ Ref: [`update_domain_change_name_server_with_authid.xml`](https://github.com/DK-
 
 This XSD definition is for the proposed extension `dkhm:authIdExDate`, which is used to enrich the response to the `info domain` request.
 
-```xml
+```xsd
   <!-- custom: authInfo expiration date -->
   <simpleType name="authInfoExDate">
     <restriction base="dateTime" />
   </simpleType>
+```
+
+Example (lifted from above):
+
+```xml
+    <extension>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
+    </extension>
 ```
 
 Ref: [`dkhm-3.1.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/master/dkhm-3.1.xsd)
