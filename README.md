@@ -151,8 +151,8 @@ The above outline is matching the description in RFC:5731
 
 The command simply unsets (_removes/clears_) an **AuthInfo** token if it exists.
 
-1 This implementation can be contained to the standard EPP specification
-1 The operation is not particularly explicit about what it does
+1. This implementation can be contained to the standard EPP specification
+1. The operation is not particularly explicit about what it does
 
 ![diagram unset auth-id process v2.0](https://github.com/DK-Hostmaster/epp-service-specification/blob/master/images/unset_auth-id_proces-2.0.png)
 
@@ -291,8 +291,8 @@ The request for completing the change of name server via EPP (GUI availability v
 
 Ref: [`update_domain_change_name_server_with_authid.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_change_name_server_with_authid.xml)
 
-1 This implementation can be contained to the standard EPP specification
-1 This implementation sets a requirement for a recommended use, for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
+1. This implementation can be contained to the standard EPP specification
+1. This implementation sets a requirement for a recommended use, for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
 
 <a id="xsd-definition"></a>
 ## XSD Definition
