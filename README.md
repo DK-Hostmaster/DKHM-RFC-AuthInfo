@@ -29,7 +29,7 @@
 <a id="introduction"></a>
 ## Introduction
 
-This is a draft and proposal for a new proces for name server changes via the DK Hostmaster EPP, Registrar-portal (RP) and self-service (SB) portals/services using **AuthInfo** (authorization token).
+This is a draft and proposal for a new process for name server changes via the DK Hostmaster EPP, Registrar-portal (RP) and self-service (SB) portals/services using **AuthInfo** (authorization token).
 
 - The goal is to make the **AuthInfo** token mandatory for use in change name server operations
 - An active **AuthInfo** token expires if the registrant is changed
@@ -52,7 +52,7 @@ The working title for this initiative was **AuthID**, we have later adopted the 
 
 The term **external** name server change is between two different name server administrators, which cannot be resolved to have any relation of belonging to the same registrar group in the registry. The term **Internal** name server change is between two name server administrators, which can be resolved to have a relation of belonging to the same registrar group with the registry.
 
-The term NSP is use to describe the nameserver administrator (NSA) and registrar users with the similar role in a registrar group.
+The term NSP is use to describe the name server administrator (NSA) and registrar users with the similar role in a registrar group.
 
 <a id="xml-and-xsd-examples"></a>
 ### XML and XSD Examples
@@ -224,7 +224,7 @@ And the `info domain` response if a **AuthInfo** is present.
       </domain:infData>
     </resData>
     <extension>
-      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
     </extension>
     <trID>
       <clTRID>ABC-12345</clTRID>
@@ -236,7 +236,7 @@ And the `info domain` response if a **AuthInfo** is present.
 
 Ref: [`info_domain_response_with_authid_extension.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/info_domain_response_with_authid_extension.xml)
 
-The response is extended with the `dkhm:authIdExDate` extension, communicating the expiration date of the current **AuthInfo** for the domain. Please see the XSD definition below.
+The response is extended with the `dkhm:authInfoExDate` extension, communicating the expiration date of the current **AuthInfo** for the domain. Please see the XSD definition below.
 
 <a id="name-server-change-request"></a>
 ### Name Server Change Request
@@ -297,7 +297,7 @@ Ref: [`update_domain_change_name_server_with_authid.xml`](https://github.com/DK-
 <a id="xsd-definition"></a>
 ## XSD Definition
 
-This XSD definition is for the proposed extension `dkhm:authIdExDate`, which is used to enrich the response to the `info domain` request.
+This XSD definition is for the proposed extension `dkhm:authInfoExDate`, which is used to enrich the response to the `info domain` request.
 
 ```xsd
   <!-- custom: authInfo expiration date -->
@@ -310,7 +310,7 @@ Example (lifted from above):
 
 ```xml
     <extension>
-      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:params:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
     </extension>
 ```
 
@@ -321,7 +321,7 @@ Ref: [`dkhm-3.1.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-fi
 <a id="scenario-matrix"></a>
 ## Scenario Matrix
 
-These matrixes aims to describe the outcome of different scenarios based on the relevant parameters.
+These matrices aims to describe the outcome of different scenarios based on the relevant parameters.
 
 Do note the matrix does not take the following scenarios into account.
 
@@ -378,8 +378,8 @@ We are still evaluating the generation of the unique key, where we want to base 
 
 The requirements are:
 
-- Unpredictable (is secure to the extent possible and for the given TTL timeframe)
-- Speakable (can be spoken over phone)
+- Unpredictable (is secure to the extent possible and for the given TTL time frame)
+- Human pronounceable (can be communicated over telephone call)
 - Usable (constrained on length and format)
 
 <a id="references"></a>
