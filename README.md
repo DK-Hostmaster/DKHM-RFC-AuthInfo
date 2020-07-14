@@ -2,7 +2,8 @@
 
 # DKHM RFC for AuthInfo
 
-![GitHub Workflow build status badge markdownlint](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Markdownlint%20Workflow/badge.svg)
+![Markdownlint Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Markdownlint%20Action/badge.svg)
+![Spellcheck Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Spellcheck%20Action/badge.svg)
 
 ## Table of Contents
 
