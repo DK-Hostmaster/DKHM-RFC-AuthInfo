@@ -47,6 +47,7 @@ This is a draft and proposal for a new process for name server changes via the D
 - [Anonymous change of name servers](https://www.dk-hostmaster.dk/en/anonymous-change-name-server) and [internal change of name servers via email](https://www.dk-hostmaster.dk/en/internal-change-name-server) will both be decommissioned
 - Multi-operation commands for EPP Update Domain will no longer be supported (more details on this below)
 - A Name service provider (NSP) can control the flow to own name servers by only supporting _pull_ operations
+- DSRECORDS will be deleted (_purged_) as part of the change of name servers operation
 
 <a id="about-this-document"></a>
 ### About this Document
@@ -66,6 +67,9 @@ This document is copyright by DK Hostmaster A/S and is licensed under the MIT Li
 
 <a id="document-history"></a>
 ### Document History
+
+- 1.1 2020-09-16
+  - Added note on the handling of DSRECORDs
 
 - 1.0 2020-09-16
   - First proper revision
@@ -309,6 +313,8 @@ Ref: [`update_domain_change_name_server_with_authid.xml`](https://github.com/DK-
 
 1. This implementation can be contained to the standard EPP specification
 1. This implementation sets a requirement for a recommended use, for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
+
+NB: DSRECORDs for the domainname are deleted (_purged_) as part of the operation of changing name servers.
 
 <a id="xsd-definition"></a>
 ## XSD Definition
