@@ -5,7 +5,7 @@
 ![Markdownlint Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Markdownlint%20Action/badge.svg)
 ![Spellcheck Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Spellcheck%20Action/badge.svg)
 
-2020-09-16 Revision: 1.0
+2020-09-16 Revision: 1.1
 
 ## Table of Contents
 
