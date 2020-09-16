@@ -5,12 +5,16 @@
 ![Markdownlint Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Markdownlint%20Action/badge.svg)
 ![Spellcheck Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Spellcheck%20Action/badge.svg)
 
+2020-09-16 Revision: 1.0
+
 ## Table of Contents
 
 <!-- MarkdownTOC bracket=round levels="1,2,3,4" indent="  " autolink="true" autoanchor="true" -->
 
 - [Introduction](#introduction)
   - [About this Document](#about-this-document)
+  - [License](#license)
+  - [Document History](#document-history)
   - [XML and XSD Examples](#xml-and-xsd-examples)
 - [Description](#description)
   - [Setting and Unsetting the AuthInfo Token](#setting-and-unsetting-the-authinfo-token)
@@ -54,6 +58,17 @@ The working title for this initiative was **AuthID**, we have later adopted the 
 The term **external** name server change is between two different name server administrators, which cannot be resolved to have any relation of belonging to the same registrar group in the registry. The term **Internal** name server change is between two name server administrators, which can be resolved to have a relation of belonging to the same registrar group with the registry.
 
 The term NSP is use to describe the name server administrator (NSA) and registrar users with the similar role in a registrar group.
+
+<a id="license"></a>
+### License
+
+This document is copyright by DK Hostmaster A/S and is licensed under the MIT License, please see the separate LICENSE file for details.
+
+<a id="document-history"></a>
+### Document History
+
+- 1.0 2020-09-16
+  - First proper revision
 
 <a id="xml-and-xsd-examples"></a>
 ### XML and XSD Examples
