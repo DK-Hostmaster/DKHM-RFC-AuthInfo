@@ -73,3 +73,5 @@ UUID
 TTL
 bcd
 cade
+DSRECORDS
+DSRECORDs
