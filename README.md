@@ -60,6 +60,8 @@ The term **external** name server change is between two different name server ad
 
 The term NSP is use to describe the name server administrator (NSA) and registrar users with the similar role in a registrar group.
 
+This document is not the authoritative source for business and policy rules and possible discrepancies between this an any authoritative sources are regarded as errors in this document. This document is aimed at the technical specification and possible implementation and is an interpretation of authoritative sources and can therefor be erroneous.
+
 <a id="license"></a>
 ### License
 
