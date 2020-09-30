@@ -191,7 +191,7 @@ Generally the two operations will support the following use-cases:
 <a id="fetching-the-authinfo-via-epp"></a>
 ### Fetching the AuthInfo via EPP
 
-When the **AuthInfo** token has been set it can be retrieved via the EPP command: `info domain` or via similar detailed information points in the RP or SB portals, due note that the retrieval requires authorization and therefor authentication and controlled access (AAA).
+When the **AuthInfo** token has been set it can be retrieved via the EPP command: `info domain` or via similar detailed information points in the RP or SB portals, do note that the retrieval requires authorization and therefor authentication and controlled access (AAA).
 
 The **AuthInfo**, if set will be reflected in the response to the request, together with an extension so communicate the expiration date of the **AuthInfo** token. Please see the XSD definition below.
 
