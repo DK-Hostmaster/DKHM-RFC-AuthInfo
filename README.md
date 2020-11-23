@@ -48,9 +48,9 @@ We have adopted the term RFC (_Request For Comments_), due to the recognition in
 
 The working title for this initiative was **AuthID**, we have later adopted the term **AuthInfo** and refer to the actual mechanism as **AuthInfo** token for easier mapping with existing and standard EPP RFC terminology. Do note the term **AuthID** might appear in examples, documentation and filenames, this can be exchanged for **AuthInfo** and **AuthInfo** token where appropriate.
 
-The RFC was primarily aimed at nameserver changes, but the scope has changed based on feedback on the proposed process and it has somewhat been superceded by the initiative ["New basis for collaboration between registrars and DK Hostmaster"][CONCEPT] available on the DK Hostmaster website.
+The RFC was primarily aimed at name server changes, but the scope has changed based on feedback on the proposed process and it has somewhat been superseded by the initiative ["New basis for collaboration between registrars and DK Hostmaster"][CONCEPT] available on the DK Hostmaster website.
 
-This document now focusses solely on the handling of authorisations, in the implementation form of AuthInfo tokens. The processes relying on use of authorizations are documented in separate RFCs, which currently is limited to:
+This document now focuses solely on the handling of authorisations, in the implementation form of AuthInfo tokens. The processes relying on use of authorizations are documented in separate RFCs, which currently is limited to:
 
 1. ["DKHM RFC for Transfer Domain EPP Command"][DKHMRFCTRANSFER]
 
@@ -65,7 +65,7 @@ This document is copyright by DK Hostmaster A/S and is licensed under the MIT Li
 ### Document History
 
 - 2.0 2020-11-23
-  - Removed information related to nameserver change, the AuthInfo handling is intact and has not been changed, except for the keyword used for generating/setting the AuthInfo token
+  - Removed information related to name server change, the AuthInfo handling is intact and has not been changed, except for the keyword used for generating/setting the AuthInfo token
   - The changes related to the `update domain` command processing has also been removed
   - Addition of additional links to resources
   - Correction to links pointing to redundant resources
