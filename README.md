@@ -5,7 +5,7 @@
 ![Markdownlint Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Markdownlint%20Action/badge.svg)
 ![Spellcheck Action](https://github.com/DK-Hostmaster/DKHM-RFC-AuthInfo/workflows/Spellcheck%20Action/badge.svg)
 
-2020-09-19 Revision: 1.2
+2020-11-21 Revision: 2.0
 
 ## Table of Contents
 
@@ -19,14 +19,8 @@
 - [Description](#description)
   - [Setting and Unsetting the AuthInfo Token](#setting-and-unsetting-the-authinfo-token)
   - [Fetching the AuthInfo via EPP](#fetching-the-authinfo-via-epp)
-  - [Name Server Change Request](#name-server-change-request)
-  - [Requesting a Name Server Change Using AuthInfo via a Pull Operation](#requesting-a-name-server-change-using-authinfo-via-a-pull-operation)
+  [AuthInfo Token Format](#authinfo-token-format)
 - [XSD Definition](#xsd-definition)
-- [Scenario Matrix](#scenario-matrix)
-  - [AuthInfo Token Access](#authinfo-token-access)
-  - [Generation of AuthInfo token with Registry](#generation-of-authinfo-token-with-registry)
-  - [Change of Name Server, pull \(external and internal\)](#change-of-name-server-pull-external-and-internal)
-- [AuthInfo Token Format](#authinfo-token-format)
 - [References](#references)
 
 <!-- /MarkdownTOC -->
@@ -34,31 +28,31 @@
 <a id="introduction"></a>
 ## Introduction
 
-This is a draft and proposal for a new process for name server changes via the DK Hostmaster EPP, Registrar-portal (RP) and self-service (SB) portals/services using **AuthInfo** (authorization token).
+This is a draft and proposal for a handling authorizations (AuthInfo, authorization token) via the DK Hostmaster EPP, Registrar-portal (RP) and self-service (SB) portals/services.
 
-- The goal is to make the **AuthInfo** token mandatory for use in change name server operations
+- The goal is to make implement temporary authorizations using **AuthInfo** token for operations that require 3rd. party involvement
+- The following processes has been identified: change registrar (transfer in EPP)
+
+Additional requirements have been identified:
+
 - An active **AuthInfo** token expires if the registrant is changed
 - An active **AuthInfo** token expires when a name server change is executed successfully.
 - An active **AuthInfo** token expires automatically after 14 days
 - Only one **AuthInfo** token is available and active at a given time if any
-- No email notifications will be sent out when the change of name server operation is executed
-- **AuthInfo** token can be retrieved via the following portals: EPP, RP and SB, by the registrant, admin/proxy or current name service provider
-- The change of name server operation can be initiated from the following portals: EPP, RP or SB
-- [Anonymous change of name servers](https://www.dk-hostmaster.dk/en/anonymous-change-name-server) and [internal change of name servers via email](https://www.dk-hostmaster.dk/en/internal-change-name-server) will both be decommissioned
-- Multi-operation commands for EPP Update Domain will no longer be supported (more details on this below)
-- A Name service provider (NSP) can control the flow to own name servers by only supporting _pull_ operations
-- DSRECORDs will be deleted (_purged_) as part of the change of name servers operation
+- **AuthInfo** token can be retrieved via the following portals: EPP, RP and SB, by the users holding the privilege to view and administer authorizations for the given domain name
 
 <a id="about-this-document"></a>
 ### About this Document
 
-We have adopted the term RFC (_Request For Comments_), due to the recognition in the term and concept, so this document is a process supporting document, aiming to serve the purpose of obtaining a common understanding of the proposed implementation and to foster discussion on the details of the implementation. The final specification will be lifted into the [DK Hostmaster EPP Service Specification](https://github.com/DK-Hostmaster/epp-service-specification) implementation and this document will be closed for comments and the document no longer be updated.
+We have adopted the term RFC (_Request For Comments_), due to the recognition in the term and concept, so this document is a process supporting document, aiming to serve the purpose of obtaining a common understanding of the proposed implementation and to foster discussion on the details of the implementation. The final specification will be lifted into the [DK Hostmaster EPP Service Specification][DKHMEPPSPEC] implementation and this document will be closed for comments and the document will no longer be updated.
 
 The working title for this initiative was **AuthID**, we have later adopted the term **AuthInfo** and refer to the actual mechanism as **AuthInfo** token for easier mapping with existing and standard EPP RFC terminology. Do note the term **AuthID** might appear in examples, documentation and filenames, this can be exchanged for **AuthInfo** and **AuthInfo** token where appropriate.
 
-The term **external** name server change is between two different name server administrators, which cannot be resolved to have any relation of belonging to the same registrar group in the registry. The term **Internal** name server change is between two name server administrators, which can be resolved to have a relation of belonging to the same registrar group with the registry.
+The RFC was primarily aimed at nameserver changes, but the scope has changed based on feedback on the proposed process and it has somewhat been superceded by the initiative ["New basis for collaboration between registrars and DK Hostmaster"][CONCEPT] available on the DK Hostmaster website.
 
-The term NSP is use to describe the name server administrator (NSA) and registrar users with the similar role in a registrar group.
+This document now focusses solely on the handling of authorisations, in the implementation form of AuthInfo tokens. The processes relying on use of authorizations are documented in separate RFCs, which currently is limited to:
+
+1. ["DKHM RFC for Transfer Domain EPP Command"][DKHMRFCTRANSFER]
 
 This document is not the authoritative source for business and policy rules and possible discrepancies between this an any authoritative sources are regarded as errors in this document. This document is aimed at the technical specification and possible implementation and is an interpretation of authoritative sources and can therefor be erroneous.
 
@@ -69,6 +63,12 @@ This document is copyright by DK Hostmaster A/S and is licensed under the MIT Li
 
 <a id="document-history"></a>
 ### Document History
+
+- 2.0 2020-11-23
+  - Removed information related to nameserver change, the AuthInfo handling is intact and has not been changed, except for the keyword used for generating/setting the AuthInfo token
+  - The changes related to the `update domain` command processing has also been removed
+  - Addition of additional links to resources
+  - Correction to links pointing to redundant resources
 
 - 1.2 2020-09-19
   - Addition of disclaimer
@@ -82,7 +82,11 @@ This document is copyright by DK Hostmaster A/S and is licensed under the MIT Li
 <a id="xml-and-xsd-examples"></a>
 ### XML and XSD Examples
 
-All example XML files are available in the [DK Hostmaster EPP XSD repository](https://github.com/DK-Hostmaster/epp-xsd-files) in the [auth_id branch](https://github.com/DK-Hostmaster/epp-xsd-files/tree/auth_id).
+All example XML files are available in the [DK Hostmaster EPP XSD repository][DKHMXSDSPEC].
+
+The proposed extensions and XSD definitions are available in version [4.0][DKHMXSD4.0] of the DK Hostmaster XSD, which is currently marked as a _pre-release_.
+
+The referenced XSD version is not deployed at this time and is only available in the [EPP XSD repository][DKHMXSDSPEC], it might be surpassed by a newer version upon deployment of the EPP service implementing the proposal, please refer to the revision of [EPP Service Specification][DKHMEPPSPEC] describing the implementation.
 
 <a id="description"></a>
 ## Description
@@ -102,22 +106,12 @@ And as proposed in this RFC:
 - setting of **AuthInfo** token
 - unsetting of **AuthInfo** token
 
-**AuthInfo** is only present in the `change` sub-command (see: [RFC:5731 Section 3.2.5](https://tools.ietf.org/html/rfc5731#page-25)). It is however not possible to indicate what sub-command the **AuthInfo** is designated for and due to the privilege and functionality mapping between operations and sub-commands, this makes it impossible to clearly indicate the scope of the authorization.
-
-In order to implement secure handling, which also ensures the best integrity and least complexity it is proposed to only support a single operation per `update domain` request. This allows for the addition and removal of name servers to be performed together, but all of the listed sub-commands have to be requested on an per request basis and cannot be bundled.
-
-![diagram update domain process v2.0](https://github.com/DK-Hostmaster/epp-service-specification/blob/master/images/epp_update_domain-v2.0.png)
-
-Currently the **AuthInfo** mechanism is only supporting the change of name servers operation (`add host` and `remove host`) for a given domain name, but since a general interface for a generic command as `update domain` it is important to make the protocol usage pattern extensible so possible future adoption in the use of **AuthInfo** authorization can be implemented without breaking backwards compatibility to the extent possible. The constraint of one operation per request honors this requirement.
-
-Only one active **AuthInfo** token is allowed at a given time, if an **AuthInfo** token is unset or expires, no **AuthInfo** is defined and hence will change of name servers not be supported for the given domain name.
-
 <a id="setting-and-unsetting-the-authinfo-token"></a>
 ### Setting and Unsetting the AuthInfo Token
 
 Setting the **AuthInfo** is as described above also expected to be handled by the `update domain` command, since this is the sole command working on the domain object in general.
 
-Setting the **AuthInfo** via EPP is expected to be accomplished using the following example, where the keyword `auto` indicates and hence initiates the generation of a new **AuthInfo** token.
+Setting the **AuthInfo** via EPP is expected to be accomplished using the following example, where the keyword will point to the requested authorization and hence initiates the generation of a new **AuthInfo** token, please see separate RFCs implementing this, ["DKHM RFC for Transfer Domain EPP Command"][DKHMRFCTRANSFER], being the sole candidate at the time of writing.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -128,7 +122,7 @@ Setting the **AuthInfo** via EPP is expected to be accomplished using the follow
         <domain:name>example.com</domain:name>
         <domain:chg>
           <domain:authInfo>
-            <domain:pw>auto</domain:pw>
+            <domain:pw>KEYWORD</domain:pw>
           </domain:authInfo>
         </domain:chg>
       </domain:update>
@@ -244,12 +238,12 @@ And the `info domain` response if a **AuthInfo** is present.
         <domain:exDate>2005-04-03T22:00:00.0Z</domain:exDate>
         <domain:trDate>2000-04-08T09:00:00.0Z</domain:trDate>
         <domain:authInfo>
-          <domain:pw>DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</domain:pw>
+          <domain:pw>DKHM1-DK-098f6bcd4621d373cade4e832627b4f6-TRANSFER</domain:pw>
         </domain:authInfo>
       </domain:infData>
     </resData>
     <extension>
-      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:xml:ns:dkhm-4.0">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
     </extension>
     <trID>
       <clTRID>ABC-12345</clTRID>
@@ -263,63 +257,26 @@ Ref: [`info_domain_response_with_authid_extension.xml`](https://github.com/DK-Ho
 
 The response is extended with the `dkhm:authInfoExDate` extension, communicating the expiration date of the current **AuthInfo** for the domain. Please see the XSD definition below.
 
-<a id="name-server-change-request"></a>
-### Name Server Change Request
+<a id="authinfo-token-format"></a>
+## AuthInfo Token Format
 
-For the actual use of the **AuthInfo**, the following use-cases have been identified:
+The **AuthInfo** token is generated by DK Hostmaster and will adhere to the following proposed format:
 
-- Requesting a Name Server Change Using AuthInfo via a Pull Operation
+`<handle>-<unique key>`
 
-<a id="requesting-a-name-server-change-using-authinfo-via-a-pull-operation"></a>
-### Requesting a Name Server Change Using AuthInfo via a Pull Operation
+E.g.
 
-Request name server change is based on an operation, where the initiator is the registrant, The registrant obtains the **AuthInfo** token from the registry or the existing NSP. The **AuthInfo** token is communicated to the new NSP, who then initiates the requests for change of name server operation hence it _pulls_ from the existing NSP,
+An **AuthInfo** token set request by DK Hostmaster A/S (`DKHM-1`) for change of registrar (transfer), will resemble the following:
 
-The **AuthInfo** can be transported _out-of-band_.
+`DKHM1-DK-098f6bcd4621d373cade4e832627b4f6-TRANSFER`
 
-![process diagram change name server using NSP authinfo process v2.0](https://github.com/DK-Hostmaster/epp-service-specification/blob/master/images/change_name_server_using_nsp_auth-id_process-v2.0.png)
+We are still evaluating the generation of the unique key, where we want to base the implementation on a unpredictable, but easily transportable format, either based on GUID, UUID or a checksum.
 
-:point_right: In most browsers it is possible to open the image in another tab to see an enlarged version.
+The requirements are:
 
-All actual change of name servers has to go via the registry and the existing infrastructure in place to support these requests and operations.
-
-The request for completing the change of name server via EPP (GUI availability via SB and RP would of course have to support transporting similar parameters).
-
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
-  <command>
-    <update>
-      <domain:update xmlns:domain="urn:ietf:params:xml:ns:domain-1.0">
-        <domain:name>example.com</domain:name>
-        <domain:add>
-          <domain:ns>
-            <domain:hostObj>ns2.example.com</domain:hostObj>
-          </domain:ns>
-        </domain:add>
-        <domain:rem>
-          <domain:ns>
-            <domain:hostObj>ns1.example.com</domain:hostObj>
-          </domain:ns>
-        </domain:rem>
-        <domain:chg>
-          <domain:authInfo>
-            <domain:pw>DKHM1-DK-098f6bcd4621d373cade4e832627b4f6</domain:pw>
-          </domain:authInfo>
-        </domain:chg>
-      </domain:update>
-    </update>
-    <clTRID>ABC-12345</clTRID>
-  </command>
-</epp>
-```
-
-Ref: [`update_domain_change_name_server_with_authid.xml`](https://github.com/DK-Hostmaster/epp-xsd-files/blob/auth_id/xml/update_domain_change_name_server_with_authid.xml)
-
-1. This implementation can be contained to the standard EPP specification
-1. This implementation sets a requirement for a recommended use, for a single operation per request, in order to handle the **AuthInfo** correctly in the AAA layer of the EPP Service application (See: References).
-
-NB: DSRECORDs for the domain name are deleted (_purged_) as part of the operation of changing name servers.
+- Unpredictable (is secure to the extent possible and for the given TTL time frame)
+- Human pronounceable (can be communicated over telephone call)
+- Usable (constrained on length and format)
 
 <a id="xsd-definition"></a>
 ## XSD Definition
@@ -337,82 +294,27 @@ Example (lifted from above):
 
 ```xml
     <extension>
-      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:xml:ns:dkhm-3.1">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
+      <dkhm:authInfoExDate xmlns:dkhm="urn:dkhm:xml:ns:dkhm-4.0">2018-11-14T09:00:00.0Z</dkhm:authInfoExDate>
     </extension>
 ```
 
-Ref: [`dkhm-3.1.xsd`](https://raw.githubusercontent.com/DK-Hostmaster/epp-xsd-files/master/dkhm-3.1.xsd)
+Ref: [`dkhm-4.0.xsd`][DKHMXSD4.0]
 
-:warning: The reference and file mentioned above is not released at this time, so this file might be re-versioned upon release.
-
-<a id="scenario-matrix"></a>
-## Scenario Matrix
-
-These matrices aims to describe the outcome of different scenarios based on the relevant parameters.
-
-Do note the matrix does not take the following scenarios into account.
-
-- DNS server does not respond to relevant DNS query
-- Domain and name server state
-
-These parameters are evaluated at run time and for the sake of communication and brevity they are not factored into the scenarios below. The descriptions assume that both name server and domain states are eligible for change of name servers for the domain in question.
-
-<a id="authinfo-token-access"></a>
-### AuthInfo Token Access
-
-| Operation                    | Existing NSP | Registrant and Admin/Proxy | New NSP |
-| :--------------------------- | :----------: | :------------------------: | :-----: |
-| Can set **AuthInfo** token   | X            | X                          |         |
-| Can unset **AuthInfo** token | X            | X                          |         |
-| Can view **AuthInfo** token  | X            | X                          | X (1)   |
-
-1) Can see if Registrant or Admin/Proxy has initiated request for change of name server, please see below: "Generation of AuthInfo token with Registry".
-
-<a id="generation-of-authinfo-token-with-registry"></a>
-### Generation of AuthInfo token with Registry
-
-| Scenario               | Outcome            |
-| :--------------------- | ------------------ |
-| Existing NSP generates | AuthInfo token (1) |
-| New NSP initiates      | Error              |
-| Admin/proxy generates  | AuthInfo token (2) |
-
-1) The **AuthInfo** token is made visible to the existing NSP, registrant and admin/proxy
-2) The **AuthInfo** token is made visible to the new NSP (recipient) and existing NSP, registrant and admin/proxy. The new NSP can then initiate the change of name servers request (_pull_).
-
-<a id="change-of-name-server-pull-external-and-internal"></a>
-### Change of Name Server, pull (external and internal)
-
-| Scenario                                | AuthInfo Token provided | Outcome           |
-| :-------------------------------------- | :---------------------: | ----------------- |
-| New NSP initiates change of name server | X                       | Change successful |
-| New NSP initiates change of name server |                         | Error             |
-
-<a id="authinfo-token-format"></a>
-## AuthInfo Token Format
-
-The **AuthInfo** token is generated by DK Hostmaster and will adhere to the following proposed format:
-
-`<handle>-<unique key>`
-
-E.g.
-
-An **AuthInfo** token set request by DK Hostmaster A/S (`DKHM-1`), will resemble the following:
-
-`DKHM1-DK-098f6bcd4621d373cade4e832627b4f6`
-
-We are still evaluating the generation of the unique key, where we want to base the implementation on a unpredictable, but easily transportable format, either based on GUID, UUID or a checksum.
-
-The requirements are:
-
-- Unpredictable (is secure to the extent possible and for the given TTL time frame)
-- Human pronounceable (can be communicated over telephone call)
-- Usable (constrained on length and format)
+The referenced XSD version is not deployed at this time and is only available in the [EPP XSD repository][DKHMXSDSPEC], it might be surpassed by a newer version upon deployment of the EPP service implementing the proposal, please refer to the revision of [EPP Service Specification][DKHMEPPSPEC] describing the implementation.
 
 <a id="references"></a>
 ## References
 
-- [DK Hostmaster EPP Service Specification](https://github.com/DK-Hostmaster/epp-service-specification)
-- [DK Hostmaster EPP Service XSD Repository](https://github.com/DK-Hostmaster/epp-xsd-files)
-- [RFC:5731: Extensible Provisioning Protocol (EPP) Domain Name Mapping](https://tools.ietf.org/html/rfc5731)
-- [Wikipedia: AAA](https://en.wikipedia.org/wiki/AAA_(computer_security))
+1. ["New basis for collaboration between registrars and DK Hostmaster"][CONCEPT]
+1. [DK Hostmaster EPP Service Specification][DKHMEPPSPEC]
+1. [DK Hostmaster EPP Service XSD Repository][DKHMXSDSPEC]
+1. ["DKHM RFC Transfer / Change Registrar"][DKHMRFCTRANSFER]
+1. [RFC:5731: "Extensible Provisioning Protocol (EPP) Domain Name Mapping"][RFC:5731]
+1. [Wikipedia: AAA](https://en.wikipedia.org/wiki/AAA_(computer_security))
+
+[CONCEPT]: https://www.dk-hostmaster.dk/en/new-basis-collaboration-between-registrars-and-dk-hostmaster
+[DKHMEPPSPEC]: https://github.com/DK-Hostmaster/epp-service-specification
+[DKHMXSDSPEC]: https://github.com/DK-Hostmaster/epp-xsd-files
+[DKHMRFCTRANSFER]: https://github.com/DK-Hostmaster/DKHM-RFC-Transfer
+[RFC:5731]: https://www.rfc-editor.org/rfc/rfc5731.html
+[DKHMXSD4.0]: https://github.com/DK-Hostmaster/epp-xsd-files/blob/master/dkhm-4.0.xsd
