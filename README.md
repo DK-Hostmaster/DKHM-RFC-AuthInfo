@@ -152,7 +152,7 @@ Here an an example outlining the suggestion for implementation of usage pattern,
         <domain:name>example.com</domain:name>
         <domain:chg>
           <domain:authInfo>
-            <domain:null>
+            <domain:null />
           </domain:authInfo>
         </domain:chg>
       </domain:update>
